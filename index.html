@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="alexa website rank script, website rank alexa, amazon website rank script, website rank">
+    <meta name="author" content="Naveen kumar Gunasekaran">
+
+    <title>Javadomain</title>
+
+	<!-- CSS imports -->
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.4/journal/bootstrap.min.css" rel="stylesheet">
+ 
+
+	<!-- datatable css -->
+    <link href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
+	
+	<!-- datatable responsive css -->
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css">
+
+	
+ 
+ <!-- JS imports -->
+ 
+    <!-- jQuery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+	 <!-- bootstrap JS -->
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+	<!-- data table js -->
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+	
+	<!-- data table responsive js -->
+	<script type="text/javascript" src="http://cdn.datatables.net/responsive/1.0.0/js/dataTables.responsive.min.js"></script>
+	
+	<!-- loading js -->
+	<script src="http://malsup.github.io/jquery.blockUI.js"></script>
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+	
+	<!--[if lte IE 9]>
+<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.3/jquery.xdomainrequest.min.js'></script>
+<![endif]-->
+
+
+<script>
+$(document).ready( function () {
+
+} );
+
+</script>
+
+
+ <script type="text/javascript">
+ 
+ $(document).ready(function(){
+ 
+  $('#inputSiteNm').on('keypress', function (event) {
+         if(event.which === 13){
+           loadAlexaRank();        
+         }
+   });
+ })
+ 
+ function loadAlexaRank(){
+var searchSiteNm = $('#inputSiteNm').val();
+if(searchSiteNm !=""){
+        $.ajax( {
+type: "POST",
+url: "Alexa.php",
+data:{siteNm: searchSiteNm },
+ beforeSend: function() {
+        $.blockUI({ css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } }); 
+    },
+success:function(htmlResp) {
+              $('div.loadAlexaRankDiv').html(htmlResp);
+			      $('#demoPostTable').addClass( 'nowrap' ).DataTable( {
+					responsive: true,searching:false,paging:false,ordering:false
+				});
+			  $.unblockUI();
+            }
+        });
+		}
+}
+    
+ </script>
+
+ <style type="text/css">
+ .search {
+	margin-top: -25%;
+}
+.search .form-section{
+	background:rgba(0,0,0,0.6);
+	border: 2px solid #414141;
+	border-radius: 5px;
+	padding: 10px;
+}
+ </style>
+ 
+
+  </head>
+
+ 
+ <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Alexa Javadomain.in</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Alexa Rank</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="http://javadomain.in">Javadomain</a></li>
+            
+          </ul>
+  
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+	
+	
+	
+	 <div class="search" style="margin-top:160px;">
+        <div class="container" >
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1 search-header">
+              <div class="form-section searchDiv">
+                <div class="row">
+                  
+                      <div class="col-md-10">
+                        <div class="form-group">
+                          <label class="sr-only" for="inputSiteNm">URL</label>
+                          <input type="text" class="form-control" id="inputSiteNm" placeholder="Enter your website name to know your Alexa Rank" >
+                        </div>
+                      </div>
+                     
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-default btn-primary" onclick="loadAlexaRank();">Search</button>
+                      </div>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	  
+	  
+	
+	
+    <div class="container" style="margin-top:100px;">
+
+	
+		<div class="loadAlexaRankDiv">
+	
+	</div>
+	
+ 
+ 
+
+
+    </div> <!-- /container -->
+
+	
+	
+
+	
+  </body>
+
+</html>
